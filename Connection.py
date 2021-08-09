@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()  # loads the encapsulated values from the .env file
 
 # Declaration Discord.py Variables
-client = discord.Client()
+client = discord.Client()  # captures the connection to discord
 the_bot = client.user
 list_of_guids = client.guilds
 
@@ -22,17 +22,15 @@ TESTING_GUILD_KEY = os.getenv('TESTING_GUILD_KEY')
 
 WAGON_STEAL_CHANNEL_KEY = os.getenv('WAGON_STEAL_CHANNEL_KEY')
 
-client = discord.Client()
-
 
 @client.event
 async def on_ready():
-    """ Confirms the bot has successfully connected to the server we targeted """
+    """ Confirms the bot has successfully connected to the targeted server """
     for each_guild in client.guilds:
         if each_guild.name == PRIMARY_GUILD_NAME:
             print("Locked In 😎\n")  # we are where we want to be
         elif each_guild.name == TESTING_GUILD_NAME:
-            print(f"The guild {client.user} is connected to is {each_guild.name}, which is recognized as a Testing "
+            print(f"{client.user} is connected to {each_guild.name}, which is recognized as a Testing "
                   f"Guild\n")
         else:
             print("Name's didn't match 🤔")

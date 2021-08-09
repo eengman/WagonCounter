@@ -3,7 +3,7 @@ from _ast import Return
 
 import Connection as connection
 import CountOccurrences as CountOccurrences
-import ReturnInfo as ReturnInfo
+import BotEvents as ReturnInfo
 
 # Establishes the connection between the code and discord
 established_connection = connection
