@@ -1,6 +1,8 @@
 """ Simple program to define the bots main functionality """
 import os
 import discord
+from discord.ext import commands
+from dotenv import load_dotenv
 
 """
 Module Scope: 
@@ -11,8 +13,7 @@ largest to smallest.
 - where 'bhwagon!' executes a specific action
 - 7 represents the amount of days to go back
 - phrase = bhwagon
-"""
-"""" 
+
 Algorithm to Define
 
 1) define a bot command, which the bot wakes up to when its called  -  ex. !bhwagon 
@@ -31,13 +32,20 @@ Tyler - 3 times
 Paul - 3 times
 Tim - 1 time
 
-"""
-client = discord.Client()
 
-target_phrase = "bhwagon"
-
-
-@client.event
-async def on_message(phrase):
     if phrase.author == client.user:
         return  # If the bot said the phrase, we want to skip over it
+"""
+
+load_dotenv()  # loads the encapsulated values from the .env file
+client = discord.Client()
+
+# Declaration of Encapsulated Variables
+TOKEN = os.getenv('BOT_TOKEN')
+TESTING_GUILD_KEY = os.getenv('TESTING_GUILD_KEY')
+
+# Program Variables
+target_phrase = "bhwagon".casefold()
+
+
+client.run(TOKEN)

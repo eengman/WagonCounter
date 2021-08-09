@@ -3,7 +3,7 @@ import os
 import discord
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv()  # loads the encapsulated values from the .env file
 
 # Declaration Discord.py Variables
 client = discord.Client()
