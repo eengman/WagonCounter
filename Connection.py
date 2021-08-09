@@ -32,7 +32,8 @@ async def on_ready():
         if each_guild.name == PRIMARY_GUILD_NAME:
             print("Locked In 😎\n")  # we are where we want to be
         elif each_guild.name == TESTING_GUILD_NAME:
-            print(f"This guild is {client.user} is connected to, is recognized as a Testing Guild\n")
+            print(f"The guild {client.user} is connected to is {each_guild.name}, which is recognized as a Testing "
+                  f"Guild\n")
         else:
             print("Name's didn't match 🤔")
 
