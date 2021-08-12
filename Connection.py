@@ -12,11 +12,9 @@ list_of_guids = client.guilds
 
 
 # Encapsulated Variables
-TOKEN = os.getenv('BOT_TOKEN')
-
+BOT_TOKEN = os.getenv('BOT_TOKEN')
 PRIMARY_GUILD_NAME = os.getenv('PRIMARY_GUILD_NAME')
 PRIMARY_GUILD_KEY = os.getenv('PRIMARY_GUILD_KEY')
-
 TESTING_GUILD_NAME = os.getenv('TESTING_GUILD_NAME')
 TESTING_GUILD_KEY = os.getenv('TESTING_GUILD_KEY')
 
@@ -34,8 +32,7 @@ async def on_ready():
                   f"Guild\n")
         else:
             print("Name's didn't match 🤔")
+        print(f'{client.user} has successfully connected to {each_guild.name}! 😁')
 
-    print(f'{client.user} has successfully connected to {each_guild.name}! 😁')
 
-
-client.run(TOKEN)
+client.run(BOT_TOKEN)
