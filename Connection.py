@@ -1,5 +1,4 @@
 import os
-
 import discord
 from dotenv import load_dotenv
 
@@ -7,9 +6,6 @@ load_dotenv()  # loads the encapsulated values from the .env file
 
 # Declaration Discord.py Variables
 client = discord.Client()  # captures the connection to discord
-the_bot = client.user
-list_of_guids = client.guilds
-
 
 # Encapsulated Variables
 BOT_TOKEN = os.getenv('BOT_TOKEN')
@@ -17,7 +13,6 @@ PRIMARY_GUILD_NAME = os.getenv('PRIMARY_GUILD_NAME')
 PRIMARY_GUILD_KEY = os.getenv('PRIMARY_GUILD_KEY')
 TESTING_GUILD_NAME = os.getenv('TESTING_GUILD_NAME')
 TESTING_GUILD_KEY = os.getenv('TESTING_GUILD_KEY')
-
 WAGON_STEAL_CHANNEL_KEY = os.getenv('WAGON_STEAL_CHANNEL_KEY')
 
 
@@ -33,6 +28,5 @@ async def on_ready():
         else:
             print("Name's didn't match 🤔")
         print(f'{client.user} has successfully connected to {each_guild.name}! 😁')
-
 
 client.run(BOT_TOKEN)

@@ -1,9 +1,9 @@
-""" This client serves as the launch pad for this bots functionality """
+""" This client serves as the launch pad for the bots functionality """
 import BotEvents as events
 import Connection as connection
 
-# Establishes the connection between the code and discord
-established_connection = connection
+# Establishes the connection between the bot and discord
+established_connection = connection.on_ready
 
-# Declares The Main Functionality For The Bot
-start_events = events
+# Declares the main functionality for the bot
+start_events = events.on_message
