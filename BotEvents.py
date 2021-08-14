@@ -7,31 +7,37 @@ from dotenv import load_dotenv
 load_dotenv()  # loads the encapsulated values from the .env file
 
 # Declaration of Encapsulated Variables
-TOKEN = os.getenv('BOT_TOKEN')
+BOT_TOKEN = os.getenv('BOT_TOKEN')
 TESTING_GUILD_KEY = os.getenv('TESTING_GUILD_KEY')
-TESTING_CHANNEL = os.getenv('TESTING_CHANNEL')
 
 # Declaration of Discord.py Intents
 intents = discord.Intents.default()  # Turns on the connection
 intents.members = True  # Ensures the member list will be updated properly
-
 bot = commands.Bot(command_prefix='!', intents=intents)  # Declares command prefix
 
 # Declaration of Discord.py Variables
-guild_key = bot.get_guild(int(TESTING_GUILD_KEY))
-user_vs_occurrence = {}  # creates an empty dictionary
+user_vs_occurrence = {}  # creates an empty dictionary , populated by on_ready
 
 
 @bot.event
 async def on_ready():
-    """ creates a dictionary of each visible user in the server """
-    initial_occurrence = 0
+    """ Creates a dictionary of each visible user in the server when the bot initially connects """
     list_of_all_members = get_all_members()
+    initial_occurrence = 0
+    print("launched")
 
     # puts each member in a dictionary and gives them a phrase occurrence of 0
     for each_member in list_of_all_members:
         user_vs_occurrence[str(each_member)] = initial_occurrence
-    print("In method ", user_vs_occurrence)
+
+
+@bot.event
+async def on_member_join(member):
+    """ Checks to see when a new member join, if they are in the dictionary or not """
+    if member in user_vs_occurrence:
+        pass
+    else:
+        user_vs_occurrence[str(member)] = 0
 
 
 @bot.event
@@ -48,7 +54,7 @@ async def on_message(message):
         for each_member in all_members:
             await message.channel.send(f"""- {each_member}""")
     elif "wagon" in message.content:
-        update_occurrences(user_vs_occurrence, message.author)
+        update_occurrences(user_vs_occurrence, message.author)  # Total sum talley starts at bot launch
 
 
 def get_all_members():
@@ -59,6 +65,7 @@ def get_all_members():
     for each_guild in bot.guilds:
         for each_member in each_guild.members:
             list_of_members.append(str(each_member))  # adds the member
+    print("hello 3")
     return list_of_members
 
 
@@ -72,4 +79,4 @@ def update_occurrences(user_vs_occurrence, member):
     print("Updated list - ", user_vs_occurrence)
 
 
-bot.run(TOKEN)
+bot.run(BOT_TOKEN)

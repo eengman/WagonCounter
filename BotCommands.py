@@ -14,7 +14,6 @@ TESTING_CHANNEL = os.getenv('TESTING_CHANNEL')
 # Declaration of Discord.py Intents
 intents = discord.Intents.default()  # Turns on the connection
 intents.members = True  # Ensures the member list will be updated properly
-
 bot = commands.Bot(command_prefix='!', intents=intents)  # Declares command prefix
 
 # Declaration of Discord.py Variables
@@ -24,7 +23,7 @@ user_vs_occurrence = {}  # creates an empty dictionary
 
 @bot.event
 async def on_ready():
-    """ creates a dictionary of each visible user in the server """
+    """ creates a dictionary of each visible user in the server when the bot """
     initial_occurrence = 0
     list_of_all_members = get_all_members()
 
@@ -46,7 +45,7 @@ def get_all_members():
 
 
 def update_occurrences(user_vs_occurrence, member):
-    """ creates a dictionary of each visible user in the server """
+    """ Creates a dictionary of each visible user in the server """
     occurrence = user_vs_occurrence.get(str(member))
 
     if str(member) in user_vs_occurrence:
@@ -69,7 +68,6 @@ async def find(ctx, days: int = None, *, phrase: str = None):
     for each_message in messages:
         if phrase in each_message.content:
             pass # todo
-
 
 
 @bot.command()
