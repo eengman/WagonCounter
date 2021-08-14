@@ -19,6 +19,19 @@ bot = commands.Bot(command_prefix='!', intents=intents)  # Declares command pref
 
 # Declaration of Discord.py Variables
 guild_key = bot.get_guild(int(TESTING_GUILD_KEY))
+user_vs_occurrence = {}  # creates an empty dictionary
+
+
+@bot.event
+async def on_ready():
+    """ creates a dictionary of each visible user in the server """
+    initial_occurrence = 0
+    list_of_all_members = get_all_members()
+
+    # puts each member in a dictionary and gives them a phrase occurrence of 0
+    for each_member in list_of_all_members:
+        user_vs_occurrence[str(each_member)] = initial_occurrence
+    print("In method ", user_vs_occurrence)
 
 
 @bot.event
@@ -35,14 +48,7 @@ async def on_message(message):
         for each_member in all_members:
             await message.channel.send(f"""- {each_member}""")
     elif "wagon" in message.content:
-        print("Inital dict - ", populate_dictionary())
-        update_occurrences(populate_dictionary(), message.author)
-
-
-@bot.event
-async def on_ready():
-    """ Shows that the bot is playing a game """
-    await bot.change_presence(activity=discord.Game('RDO - Wagon Stealing'))
+        update_occurrences(user_vs_occurrence, message.author)
 
 
 def get_all_members():
@@ -56,17 +62,6 @@ def get_all_members():
     return list_of_members
 
 
-def populate_dictionary():
-    """ creates a dictionary of each visible user in the server """
-    user_vs_occurrence = {}  # creates an empty dictionary
-    list_of_all_members = get_all_members()
-
-    # puts each member in a dictionary and gives them a phrase occurrence of 0
-    for each_member in list_of_all_members:
-        user_vs_occurrence[str(each_member)] = 0
-    return user_vs_occurrence
-
-
 def update_occurrences(user_vs_occurrence, member):
     """ creates a dictionary of each visible user in the server """
     occurrence = user_vs_occurrence.get(str(member))
@@ -74,7 +69,7 @@ def update_occurrences(user_vs_occurrence, member):
     if str(member) in user_vs_occurrence:
         occurrence = occurrence + 1
         user_vs_occurrence.update({str(member): occurrence})
-    print(user_vs_occurrence)
+    print("Updated list - ", user_vs_occurrence)
 
 
 bot.run(TOKEN)

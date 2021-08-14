@@ -4,6 +4,10 @@ from dotenv import load_dotenv
 
 load_dotenv()  # loads the encapsulated values from the .env file
 
+# Declaration of Discord.py Intents
+intents = discord.Intents.default()  # Turns on the connection
+intents.members = True  # Ensures the member list will be updated properly
+
 # Declaration Discord.py Variables
 client = discord.Client()  # captures the connection to discord
 
@@ -28,6 +32,7 @@ async def on_ready():
         else:
             print("Name's didn't match 🤔")
         print(f'{client.user} has successfully connected to {each_guild.name}! 😁\n')
+    await client.change_presence(activity=discord.Game('RDO - Wagon Stealing'))
 
 
 def get_all_members():
