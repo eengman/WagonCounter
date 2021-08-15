@@ -1,7 +1,7 @@
 """ This module serves as the launch pad for the bots connection and functionality """
+import EmbededOutputDisplay
 import Connection
 import BotEvents
-import EmbededOutputDisplay
 
 # Establishes the connection between the bot and discord
 established_connection = Connection.on_ready()

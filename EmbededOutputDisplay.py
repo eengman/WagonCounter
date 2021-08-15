@@ -12,7 +12,7 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 # Declaration Discord.py Variables
 intents = discord.Intents.default()  # Turns on the connection
 intents.members = True  # Ensures the member list will be updated properly
-client = commands.Bot(command_prefix='!', intents=intents)  # Declares command prefix
+client = commands.Bot(command_prefix='!', intents=intents)  # Declares command prefix and turns on all intents
 
 # Declaration of Discord.py Variables
 user_vs_occurrence = {}  # creates an empty dictionary , populated by on_ready
@@ -31,14 +31,19 @@ async def on_ready():
 
 @client.command()
 async def wagonSteals(ctx):
+    """
+    Returns a embeded message from the bot about the top users who've said 'bhwagon'
+    :param ctx: context of the command
+    :return: a formatted list of users w/ the number of occurrences of 'bhwagon' said
+    """
     wagonSteals = discord.Embed(
         title="Wagon Steals Counter",
         url="https://docs.google.com/spreadsheets/d/1or_UMRcmDrRPi1DyxbF0yYWOs7ujeW0qTmsf6nwrqPc/edit#gid=1230983397",
         description=" text ",
-        color=0xFF5733)
+        color=0x2AB050)
 
     # This shows the member who called the bot function
-    members.set_author(name=ctx.author.display_name,
+    wagonSteals.set_author(name=ctx.author.display_name,
                        url="https://www.blackhatsride.com",
                        icon_url=ctx.author.avatar_url)
     await ctx.send(embed=wagonSteals)
@@ -48,17 +53,19 @@ async def wagonSteals(ctx):
 async def members(ctx):
     """
     Returns a complete list of the members when a member of the guild types !members
-    :param ctx: context parameter
-    :return: a complete list of members the bot can currently see
+    along with the total number of users, including breaking the number of users down by roles
+    :param ctx: context of the command
+    :return: a complete list of members, the total amount in each role
     """
     all_members = get_all_members()
 
+    # TODO - replace over the testing roles
     # black_hats = ctx.guild.get_role(813926082960162866)
     # prospectors = ctx.guild.get_role(822261499384037418)
     # prospects = ctx.guild.get_role(861013512189116446)
     # recruits = ctx.guild.get_role(813925577383084052)
 
-    # testing roles
+    # testing roles - TODO - delete after testing
     purple = ctx.guild.get_role(876356417085374485)
     green = ctx.guild.get_role(876356464632025110)
 
@@ -66,12 +73,18 @@ async def members(ctx):
         title="Current Members List",
         url="https://www.blackhatsride.com/about-us",
         description='-' + "\n-".join(all_members),
-        color=0xFF5733)
+        color=0x4EEDEB)
 
     # This shows the member who called the bot function
     members.set_author(name=ctx.author.display_name,
                        url="https://www.blackhatsride.com",
                        icon_url=ctx.author.avatar_url)
+
+    # members.add_field(name="Current member count is ".title(), value=str(len(all_members)), inline=False)
+    # members.add_field(name="Current Black Hat count is ".title(), value=str(len(black_hats)), inline=False)
+    # members.add_field(name="Current Prospectors count is ".title(), value=str(len(prospectors)), inline=False)
+    # members.add_field(name="Current Prospects count is ".title(), value=str(len(prospects)), inline=False)
+    # members.add_field(name="Current Recruits count is ".title(), value=str(len(recruits)), inline=False)
 
     members.add_field(name="Current member count is ".title(), value=str(len(all_members)), inline=False)
     members.add_field(name="Total Amount of Purple Roles ".title(), value=str(len(purple.members)), inline=False)
@@ -83,7 +96,7 @@ async def members(ctx):
 @client.command()
 async def guide(ctx):
     """
-    returns a Survival guide created by a member of the Black Hats
+    returns a Survival Guide - Outlaw 101, created by a member of the Black Hats
     :param ctx: context
     :return: a hyperlink to a website which contains the survival guide - outlaw 101
     """
@@ -104,11 +117,16 @@ async def guide(ctx):
 
 @client.command()
 async def eliteRanks(ctx):
+    """
+    Returns a list of possible roles the member may earn
+    :param ctx: context of the discord bot
+    :return: a complete list of all possible roles the members may earn
+    """
     eliteRanks = discord.Embed(
         title="Black Hat RDO - Elite Titles",
         url="https://docs.google.com/spreadsheets/d/1or_UMRcmDrRPi1DyxbF0yYWOs7ujeW0qTmsf6nwrqPc/edit#gid=1230983397",
         description="This is a list of the 'Elite Titles' that can be earned as described below ",
-        color=0xE39DC2)
+        color=0xFFDF00)
 
     # This shows the member who called the bot function
     eliteRanks.set_author(name=ctx.author.display_name,
@@ -137,10 +155,15 @@ async def eliteRanks(ctx):
 
 @client.command()
 async def commands(ctx):
+    """
+    A message from the bot containing all of the commands that may be used
+    :param ctx: context of the bot command
+    :return: returns a message from the bot that has all the commands and their descriptions
+    """
     commands = discord.Embed(
         title="WagonCounter Command Help",
         description="Here is a list of the different bot commands that you may use to call on me!",
-        color=0xE39DC2)
+        color=0xF70C1C)
 
     # This shows the member who called the bot function
     commands.set_author(name=ctx.author.display_name,

@@ -19,7 +19,7 @@ TESTING_GUILD_NAME = os.getenv('TESTING_GUILD_NAME')
 async def on_ready():
     """
      Confirms the bot has successfully connected to the targeted server along with setting the game activity
-    :return: Prints a message to console letting know how the bot connected
+    :return: Prints a message to console letting know where the bot connected
     """
     for each_guild in client.guilds:
         if each_guild.name == PRIMARY_GUILD_NAME:
