@@ -135,6 +135,29 @@ async def eliteRanks(ctx):
     await ctx.send(embed=eliteRanks)
 
 
+@client.command()
+async def commands(ctx):
+    commands = discord.Embed(
+        title="WagonCounter Command Help",
+        description="Here is a list of the different bot commands that you may use to call on me!",
+        color=0xE39DC2)
+
+    # This shows the member who called the bot function
+    commands.set_author(name=ctx.author.display_name,
+                          url="https://www.blackhatsride.com",
+                          icon_url=ctx.author.avatar_url)
+
+    commands.add_field(name="!wagonSteal xx", value="Returns a list of users along with the occurrences of how often "
+                                                     "they have said 'bhwagon' in the server", inline=False)
+    commands.add_field(name="!members", value="Returns a list of each member in the guild, along with how many of each "
+                                              "role, and then a total count of members.", inline=False)
+    commands.add_field(name="!guide", value="Returns a link to the Black Hat Out Law 101 - Survival Guide created by "
+                                            "Katykinss#8895.", inline=False)
+    commands.add_field(name="!eliteRanks", value="Returns all the additional titles members may earn", inline=False)
+
+    await ctx.send(embed=commands)
+
+
 def get_all_members():
     """ Returns A list of users currently in the server """
     list_of_members = []  # Declaration of empty list
