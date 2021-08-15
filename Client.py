@@ -1,17 +1,16 @@
 """ This module serves as the launch pad for the bots connection and functionality """
 import Connection
 import BotEvents
-import BotCommands
-import WagonOutputDisplay
+import EmbededOutputDisplay
 
 # Establishes the connection between the bot and discord
 established_connection = Connection.on_ready()
 
-# Initializes the bot events to start
-start_events = BotEvents.on_ready()
+# Handles all the Bot events and returns information about the guild based on event calls
+handle_events = BotEvents
 
-# Initializes the bot commands to start
-start_commands = BotCommands
+# Handles all the bot actions
+print_messages = EmbededOutputDisplay
 
-embed = WagonOutputDisplay
+
 

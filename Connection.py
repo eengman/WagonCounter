@@ -6,10 +6,6 @@ from dotenv import load_dotenv
 
 load_dotenv()  # loads the encapsulated values from the .env file
 
-# Declaration of Discord.py Intents
-intents = discord.Intents.default()  # Turns on the connection
-intents.members = True  # Ensures the member list will be updated properly
-
 # Declaration Discord.py Variables
 client = discord.Client()  # captures the connection to discord
 
@@ -21,7 +17,10 @@ TESTING_GUILD_NAME = os.getenv('TESTING_GUILD_NAME')
 
 @client.event
 async def on_ready():
-    """ Confirms the bot has successfully connected to the targeted server """
+    """
+     Confirms the bot has successfully connected to the targeted server along with setting the game activity
+    :return: Prints a message to console letting know how the bot connected
+    """
     for each_guild in client.guilds:
         if each_guild.name == PRIMARY_GUILD_NAME:
             print("Locked In 😎\n")  # we are where we want to be
@@ -32,6 +31,5 @@ async def on_ready():
             print("Name's didn't match 🤔")
         print(f'{client.user} has successfully connected to {each_guild.name}! 😁\n')
     await client.change_presence(activity=discord.Game('RDO - Wagon Stealing'))  # sets the bots Activity
-
 
 client.run(BOT_TOKEN)
