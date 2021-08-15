@@ -112,13 +112,13 @@ async def eliteRanks(ctx):
 
     # This shows the member who called the bot function
     eliteRanks.set_author(name=ctx.author.display_name,
-                       url="https://www.blackhatsride.com",
-                       icon_url=ctx.author.avatar_url)
+                          url="https://www.blackhatsride.com",
+                          icon_url=ctx.author.avatar_url)
 
     eliteRanks.add_field(name="The Honorable".title(), value="Given monthly to whichever Black Hat has accrued the most"
-                                                          " honor points for the month.", inline=False)
+                                                             " honor points for the month.", inline=False)
     eliteRanks.add_field(name="Wagon Whisperer".title(), value="Given Monthly to whichever Black Hat steals the most "
-                                                            "wagons in the month.", inline=False)
+                                                               "wagons in the month.", inline=False)
     eliteRanks.add_field(name="Wagon Chief".title(), value="This title, once earned stays with you. To earn this Elite "
                                                            "Title, you must complete the following challenges: \n- Be a"
                                                            " Full Black Hat. (Cannot be a recruit or prospect.) \n- 50 "
@@ -131,7 +131,7 @@ async def eliteRanks(ctx):
                                                            "while the player pursuing the challenge completes the steal."
                                                            ")"
                          , inline=False)
-
+    eliteRanks.set_footer(text="Notes: a single witness may be substituted for a video and/or stream")
     await ctx.send(embed=eliteRanks)
 
 
@@ -144,11 +144,11 @@ async def commands(ctx):
 
     # This shows the member who called the bot function
     commands.set_author(name=ctx.author.display_name,
-                          url="https://www.blackhatsride.com",
-                          icon_url=ctx.author.avatar_url)
+                        url="https://www.blackhatsride.com",
+                        icon_url=ctx.author.avatar_url)
 
     commands.add_field(name="!wagonSteal xx", value="Returns a list of users along with the occurrences of how often "
-                                                     "they have said 'bhwagon' in the server", inline=False)
+                                                    "they have said 'bhwagon' in the server", inline=False)
     commands.add_field(name="!members", value="Returns a list of each member in the guild, along with how many of each "
                                               "role, and then a total count of members.", inline=False)
     commands.add_field(name="!guide", value="Returns a link to the Black Hat Out Law 101 - Survival Guide created by "
